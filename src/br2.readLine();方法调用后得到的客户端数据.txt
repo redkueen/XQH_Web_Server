@@ -1,0 +1,10 @@
+GET /goods.html HTTP/1.1
+Host: 10.1.2.107
+Connection: keep-alive
+Cache-Control: max-age=0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
+User-Agent: Mozilla/5.0 (Linux; Android 7.0; PRA-AL00 Build/HONORPRA-AL00) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.0.0 Mobile Safari/537.36
+q-refer: 000600
+Accept-Encoding: gzip, deflate
+Accept-Language: zh-CN,en-US;q=0.8
+
