@@ -14,29 +14,31 @@ public class XQHRunnable implements Runnable{
 //            BufferedReader bis = new BufferedReader( client.getInputStream());
 //            byte[] b= new byte[bis.available()];
 //            bis.read(b);
-//            String s=new String(b);
+//            String requestLine = new String(b);
 
-            BufferedReader br2 = new BufferedReader( new InputStreamReader(client.getInputStream()));
-            String L=br2.readLine();
-            String f = L.split(" ")[1];
-            BufferedReader BR = new BufferedReader(new FileReader("D:\\XQH_Web_Server\\src\\" + f));
-//            BufferedReader BR = new BufferedReader(new FileReader("D:\\XQH_Web_Server\\src\\goods.html"));
-            String k = null;
+            BufferedReader brClient = new BufferedReader( new InputStreamReader(client.getInputStream()));
+            String requestLine1=brClient.readLine();
+            String requestFileName = requestLine1.split(" ")[1];
+            BufferedReader brFile = new BufferedReader(new FileReader("D:\\XQH_Web_Server\\src\\" + requestFileName));
+//            BufferedReader brFile = new BufferedReader(new FileReader("D:\\XQH_Web_Server\\src\\goods.html"));
+            String readOneLine = null;
             String n ="";
-            while ((k = BR.readLine()) != null) {
-                n = n + k;
+            while ((readOneLine = brFile.readLine()) != null) {
+                n = n + readOneLine;
             }
-            BufferedWriter BW = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
-            BW.write("HTTP/1.1 200 OK\n" +
-                    "Content-Length:" + n.getBytes().length + "\n" +
+            String responseBody = n ;
+            BufferedWriter bwClient = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+            String responseHead = "HTTP/1.1 200 OK\n" +
+                    "Content-Length:" + responseBody.getBytes().length + "\n" ;
+            bwClient.write(responseHead +
                     "\n" +
-                    n
+                    responseBody
             );
-            BW.flush();
-            br2.close();
+            bwClient.flush();
+            brClient.close();
             client.close();
-            BR.close();
-            BW.close();
+            brFile.close();
+            bwClient.close();
 
         }
         catch (FileNotFoundException e) {
