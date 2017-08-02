@@ -8,7 +8,7 @@ public class XQH_Web_Server {
             ServerSocket ss = new ServerSocket(80);
             while (true){
                 Socket cli= ss.accept();
-                new Thread(new XQHRunnable(cli)).start();
+                new Thread(new XQHRunnable1(cli)).start();
             }
         } catch (IOException e) {
             e.printStackTrace();
